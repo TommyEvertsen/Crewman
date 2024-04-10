@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Employees;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,8 +25,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/test', function () {
-    return Inertia::render('Test');
-});
+
+Route::get('/employees', function () {
+    return Inertia::render('Employees', [
+        'employees' => Employees::all()
+    ]);
+})->name('employees');
 
 require __DIR__ . '/auth.php';

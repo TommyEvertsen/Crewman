@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Employers;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->integer('ZID')->unique();
+            $table->foreignIdFor(Employers::class);
         });
     }
 

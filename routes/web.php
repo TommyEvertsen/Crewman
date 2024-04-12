@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Models\Employees;
+use App\Models\Employers;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,9 +28,23 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/employees', function () {
+
+    $employees = Employees::with('employer.name')->get();
+    $employer = Employers::all();
+
     return Inertia::render('Employees', [
-        'employees' => Employees::all()
+        'employees' => $employees,
+        'employer' => $employer,
     ]);
 })->name('employees');
+
+
+
+
+
+Route::get('/newemployee', function () {
+
+    return Inertia::render('NewEmployee', []);
+})->name('newEmployee');
 
 require __DIR__ . '/auth.php';

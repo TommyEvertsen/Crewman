@@ -13,12 +13,7 @@ class Employees extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'firstName',
-        'lastName',
-        'ZID',
-        'id',
-    ];
+   
 
     public function employer(): BelongsTo
     {
@@ -44,4 +39,6 @@ class Employees extends Model
     {
         return $this->hasManyThrough(Assignments::class, Leaves::class);
     }
+
+    
 }

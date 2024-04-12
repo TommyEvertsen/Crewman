@@ -15,6 +15,11 @@ import { Head } from "@inertiajs/vue3";
                 link
                 title="View Employees"
             ></v-list-item>
+            <v-list-item
+                :href="route('newEmployee')"
+                link
+                title="Add employee"
+            ></v-list-item>
         </v-navigation-drawer>
     </v-app>
 </template>

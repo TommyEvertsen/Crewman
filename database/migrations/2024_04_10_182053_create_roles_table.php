@@ -14,10 +14,11 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('role_type');
             $table->timestamp('start_date');
             $table->timestamp('end_date');
-            $table->foreignIdFor(Assignments::class);
+            $table->foreignId('assignments_id')->nullable()->constrained('assignments');
         });
     }
 

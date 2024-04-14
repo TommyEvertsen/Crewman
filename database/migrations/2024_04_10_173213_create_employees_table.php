@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->integer('ZID')->unique();
-            $table->foreignIdFor(Employers::class);
+            $table->foreignId('employers_id')->nullable()->constrained('employers');
         });
     }
 

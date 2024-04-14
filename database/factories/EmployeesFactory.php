@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Employees;
+use App\Models\PastAndFutureEmployer;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -22,8 +23,17 @@ class EmployeesFactory extends Factory
             'firstName' => fake()->name(),
             'lastName' => fake()->name(),
             'ZID' => $this->faker->numberBetween(10000, 99999)
-
-
         ];
+    }
+    /**
+     * Configure the model factory.
+     *
+     * @return $this
+     */
+    public function configure()
+    {
+        return $this->afterCreating(function (Employees $employee) {
+            $employee->pastAndFutureEmployer()->save(PastAndFutureEmployer::factory()->make());
+        });
     }
 }

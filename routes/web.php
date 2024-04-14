@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmploeyeesController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Employees;
 use App\Models\Employers;
@@ -27,17 +28,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/employees', function () {
-
-    $employees = Employees::with('employer.name')->get();
-    $employer = Employers::all();
-
-    return Inertia::render('Employees', [
-        'employees' => $employees,
-        'employer' => $employer,
-    ]);
-})->name('employees');
-
+Route::resource('index', EmploeyeesController::class)->names([
+    'index' => 'employees.index',
+    'store' => 'employees.store',
+]);;
 
 
 

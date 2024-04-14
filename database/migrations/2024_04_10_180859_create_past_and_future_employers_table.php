@@ -14,9 +14,11 @@ return new class extends Migration
     {
         Schema::create('past_and_future_employers', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
+            $table->string('name');
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
-            $table->foreignIdFor(Employees::class);
+            $table->foreignId('employees_id')->nullable()->constrained('employees');
         });
     }
 

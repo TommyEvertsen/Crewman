@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employers extends Model
 {
+
+    protected $fillable = [
+        'name',
+
+    ];
+
     use HasFactory;
 
     public function employees(): HasMany

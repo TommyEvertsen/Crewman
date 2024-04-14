@@ -13,11 +13,16 @@ class Employees extends Model
 {
     use HasFactory;
 
-   
+    protected $fillable = [
+        'firstName',
+        'lastName',
+        'ZID'
+    ];
+
 
     public function employer(): BelongsTo
     {
-        return $this->belongsTo(Employers::class);
+        return $this->belongsTo(Employers::class, 'employers_id');
     }
 
     public function pastAndFutureEmployer(): HasMany
@@ -39,6 +44,4 @@ class Employees extends Model
     {
         return $this->hasManyThrough(Assignments::class, Leaves::class);
     }
-
-    
 }

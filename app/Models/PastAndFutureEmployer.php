@@ -10,8 +10,14 @@ class PastAndFutureEmployer extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+    ];
+
     public function employees(): BelongsTo
     {
-        return $this->belongsTo(Employees::class);
+        return $this->belongsTo(Employees::class, 'employees_id');
     }
 }

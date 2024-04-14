@@ -9,11 +9,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Assignments extends Model
 {
+    protected $fillable = [
+        'name',
+    ];
+
     use HasFactory;
 
     public function employer(): BelongsTo
     {
-        return $this->belongsTo(Employers::class);
+        return $this->belongsTo(Employers::class, 'employers_id');
     }
 
     public function locations(): HasMany

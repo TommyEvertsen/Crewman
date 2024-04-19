@@ -28,16 +28,20 @@ Route::middleware('auth')->group(function () {
 });
 
 
+
+
+//Crewman
 Route::resource('index', EmploeyeesController::class)->names([
     'index' => 'employees.index',
     'store' => 'employees.store',
-]);;
+]);
 
-
-
+Route::get('/showEmployment/{employees}', function ($employees) {
+    $employee = Employees::findOrFail($employees);
+    return Inertia::render('ShowEmployment', ['employee' => $employee]);
+})->name('showEmployment');
 
 Route::get('/newemployee', function () {
-
     return Inertia::render('NewEmployee', []);
 })->name('newEmployee');
 

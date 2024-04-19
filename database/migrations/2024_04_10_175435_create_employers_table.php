@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Assignments;
 use App\Models\Employees;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->foreignId('employees_id')->nullable()->constrained('employees');
-            $table->foreignId('assignments_id')->nullable()->constrained('assignments');
         });
     }
 

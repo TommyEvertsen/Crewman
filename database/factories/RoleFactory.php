@@ -17,8 +17,11 @@ class RoleFactory extends Factory
      */
     public function definition(): array
     {
+
+        $setRole = (rand(1, 2) < 2) ? "Ansatt" : "Admin";
+
         return [
-            'role_type' => fake()->name(),
+            'role_type' => $setRole,
             'start_date' => Carbon::today()->subDays(rand(1, 365)),
             'end_date' => Carbon::today()->subDays(rand(1, 365)),
         ];

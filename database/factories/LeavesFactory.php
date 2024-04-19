@@ -17,8 +17,10 @@ class LeavesFactory extends Factory
      */
     public function definition(): array
     {
+        $setLeave = (rand(1, 2) < 2) ? "Ferie" : "Permisjon";
+
         return [
-            'role_type' => fake()->name(),
+            'name' => $setLeave,
             'start_date' => Carbon::today()->subDays(rand(1, 365)),
             'end_date' => Carbon::today()->subDays(rand(1, 365)),
         ];

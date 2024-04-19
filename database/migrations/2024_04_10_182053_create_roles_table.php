@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('role_type');
             $table->timestamp('start_date');
             $table->timestamp('end_date');
-            $table->foreignId('assignments_id')->nullable()->constrained('assignments');
+            $table->foreignIdFor(Assignments::class, 'assignments_id')->nullable();
         });
     }
 

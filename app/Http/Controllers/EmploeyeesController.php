@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Assignments;
 use App\Models\Employees;
 use App\Models\Employers;
+use App\Models\Leaves;
+use App\Models\Locations;
 use App\Models\PastAndFutureEmployer;
 use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
@@ -21,7 +23,7 @@ class EmploeyeesController extends Controller
      */
     public function index()
     {
-        $employees = Employees::with('pastAndFutureEmployer', 'employer.assignments')->get();
+        $employees = Employees::with('pastAndFutureEmployer', 'employer.assignments.assignmentroles', 'employer.assignments.assignmentleaves')->get();
 
         return Inertia::render('Employees', [
             'employees' => $employees,
@@ -75,14 +77,23 @@ class EmploeyeesController extends Controller
 
         $employer->assignments()->save($assignments);
 
-        /*  $role = new Role();
-        $role->role_type = fake()->name();
+        $leaves = new Leaves();
+        $setLeave = (rand(1, 2) < 2) ? "Ferie" : "Permisjon";
+        $leaves->name = $setLeave;
+        $leaves->start_date  = Carbon::today()->subDays(rand(1, 365));
+        $leaves->end_date  = Carbon::today()->subDays(rand(1, 365));
+        $leaves->save();
+
+        $assignments->assignmentleaves()->save($leaves);
+
+        $role = new Role();
+        $setRole = (rand(1, 2) < 2) ? "Ansatt" : "Admin";
+        $role->role_type = $setRole;
         $role->start_date  = Carbon::today()->subDays(rand(1, 365));
         $role->end_date  = Carbon::today()->subDays(rand(1, 365));
         $role->save();
 
-        $assignments->roles()->save($role); */
-
+        $assignments->assignmentroles()->save($role);
 
 
         return redirect(route('employees.index'));

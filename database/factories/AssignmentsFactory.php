@@ -32,10 +32,11 @@ class AssignmentsFactory extends Factory
      *
      * @return $this
      */
-    /*  public function configure()
+    public function configure()
     {
         return $this->afterCreating(function (Assignments $assignments) {
-            $assignments->leaves()->save(Leaves::factory()->make());
+            $assignments->assignmentleaves()->save(Leaves::factory()->make());
+            $assignments->assignmentroles()->save(Role::factory()->make());
         });
-    } */
+    }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
-            $table->foreignId('employers_id')->nullable()->constrained('employers');
+            $table->foreignIdFor(Employers::class, 'employers_id')->nullable();
         });
     }
 

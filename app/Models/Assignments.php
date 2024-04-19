@@ -17,7 +17,7 @@ class Assignments extends Model
 
     public function employer(): BelongsTo
     {
-        return $this->belongsTo(Employers::class, 'employers_id');
+        return $this->belongsTo(Employers::class);
     }
 
     public function locations(): HasMany
@@ -25,13 +25,13 @@ class Assignments extends Model
         return $this->hasMany(Locations::class);
     }
 
-    public function roles(): HasMany
+    public function assignmentroles(): HasMany
     {
-        return $this->roles(Role::class);
+        return $this->hasMany(Role::class);
     }
 
-    public function leaves(): HasMany
+    public function assignmentleaves(): HasMany
     {
-        return $this->roles(Leaves::class);
+        return $this->hasMany(Leaves::class);
     }
 }

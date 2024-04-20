@@ -17,12 +17,12 @@ class LeavesFactory extends Factory
      */
     public function definition(): array
     {
-        $setLeave = (rand(1, 2) < 2) ? "Ferie" : "Permisjon";
+        $setLeave = (rand(1, 2) < 2) ? "Vacation" : "Sick leave";
 
         return [
             'name' => $setLeave,
-            'start_date' => Carbon::today()->subDays(rand(1, 365)),
-            'end_date' => Carbon::today()->subDays(rand(1, 365)),
+            'start_date' => fake()->date(),
+            'end_date' => fake()->date(),
         ];
     }
 }

@@ -1,40 +1,50 @@
 <template>
-    <v-card title="Employees" flat>
-        <template v-slot:text> </template>
-        <p>{{ console.log(employees) }}</p>
-        <v-data-table :headers="headers" :items="employees"></v-data-table>
-        <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue-darken-1" variant="text" @click="close">
-                Cancel
-            </v-btn>
-            <v-btn color="blue-darken-1" variant="text" @click="save">
-                Save
-            </v-btn>
-        </v-card-actions>
-    </v-card>
+    <v-app>
+        <v-app-bar>
+            <v-app-bar-title>Crewman</v-app-bar-title>
+            <v-list-item
+                :href="route('employees.index')"
+                link
+                title="View Employees"
+            ></v-list-item>
+            <v-list-item
+                :href="route('newEmployee')"
+                link
+                title="Add employer"
+            ></v-list-item>
+        </v-app-bar>
+
+        <v-sheet flat class="my-auto">
+            <v-data-table 
+                :headers="headers"
+                :items="employees"
+                @click:row="showEmployee"
+            >
+            </v-data-table>
+        </v-sheet>
+    </v-app>
+    <p>{{ console.log(employees) }}</p>
 </template>
 
 <script setup>
 defineProps(["employees"]);
 
+function showEmployee(event, row) {
+    const url = route("showEmployment", { employee: row.item });
+    window.location.href = url;
+}
+
 const headers = [
     { key: "firstName", title: "First name" },
     { key: "lastName", title: "Last name" },
     { key: "ZID", title: "ZID" },
-    { key: "employer.name", title: "Current employer" },
-    {
-        key: "past_and_future_employer[0].name",
-        title: "Past and future employer",
-    },
-    { key: "employer.assignments[0].name", title: "Assignments" },
-    {
-        key: "employer.assignments[0].assignmentleaves[0].name",
-        title: "leaves",
-    },
-    {
-        key: "employer.assignments[0].assignmentroles[0].role_type",
-        title: "roles",
-    },
+    { key: "employer.name", title: "Most recent employer" },
 ];
 </script>
+
+<style>
+.v-app-bar {
+    background-color: rgb(54, 162, 235) !important;
+    color: azure !important;
+}
+</style>

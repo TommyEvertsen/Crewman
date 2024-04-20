@@ -36,8 +36,9 @@ Route::resource('index', EmploeyeesController::class)->names([
     'store' => 'employees.store',
 ]);
 
-Route::get('/showEmployment/{employees}', function ($employees) {
-    $employee = Employees::findOrFail($employees);
+Route::get('/showEmployment/{employee}', function ($employee) {
+    $employee = Employees::with('pastAndFutureEmployer', 'employer.assignments.assignmentroles', 'employer.assignments.assignmentleaves')
+        ->findOrFail($employee);
     return Inertia::render('ShowEmployment', ['employee' => $employee]);
 })->name('showEmployment');
 

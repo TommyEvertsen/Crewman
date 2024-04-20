@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('role_type');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->foreignIdFor(Assignments::class, 'assignments_id')->nullable();
         });
     }

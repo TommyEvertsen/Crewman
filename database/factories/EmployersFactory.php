@@ -18,7 +18,7 @@ class EmployersFactory extends Factory
     {
         return [
             'id' => $this->faker->numberBetween(1, 99999),
-            'name' => fake()->name(),
+            'name' => fake()->company(),
         ];
     }
 }

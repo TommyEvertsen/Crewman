@@ -45,56 +45,57 @@ class EmploeyeesController extends Controller
         $createZID = rand(10000, 99999);
 
         $validated = $request->validate([
-            'name' => 'required|string|max:40',
+            'employerName' => 'required|string|max:40',
+            'employeeFName' => 'required|string|max:40',
+            'employeeLName' => 'required|string|max:40',
 
         ]);
 
         $employer = new Employers();
-        $employer->name = $validated['name'];
+        $employer->name = $validated['employerName'];
         $employer->save();
 
         $employees = new Employees();
-        $employees->firstName = fake()->name();
-        $employees->lastName = fake()->name();
+        $employees->firstName = $validated['employeeFName'];
+        $employees->lastName = $validated['employeeLName'];
         $employees->ZID = $createZID;
         $employees->save();
 
         $employer->employees()->save($employees);
 
         $futureEmployments = new PastAndFutureEmployer();
-        $futureEmployments->name = fake()->name();
-        $futureEmployments->start_date  = Carbon::today()->subDays(rand(1, 365));
-        $futureEmployments->end_date  = Carbon::today()->subDays(rand(1, 365));
+        $futureEmployments->name = fake()->company();
+        $futureEmployments->start_date  = fake()->date();
+        $futureEmployments->end_date  = fake()->date();
         $futureEmployments->save();
 
         $employees->pastAndFutureEmployer()->save($futureEmployments);
 
         $assignments = new Assignments();
-        $assignments->name = fake()->name();
-        $assignments->start_date  = Carbon::today()->subDays(rand(1, 365));
-        $assignments->end_date  = Carbon::today()->subDays(rand(1, 365));
+        $assignments->name = fake()->bs();
+        $assignments->start_date  = fake()->date();
+        $assignments->end_date  = fake()->date();
         $assignments->save();
 
         $employer->assignments()->save($assignments);
 
         $leaves = new Leaves();
-        $setLeave = (rand(1, 2) < 2) ? "Ferie" : "Permisjon";
+        $setLeave = (rand(1, 2) < 2) ? "Vacation" : "Sick leave";
         $leaves->name = $setLeave;
-        $leaves->start_date  = Carbon::today()->subDays(rand(1, 365));
-        $leaves->end_date  = Carbon::today()->subDays(rand(1, 365));
+        $leaves->start_date  = fake()->date();
+        $leaves->end_date  = fake()->date();
         $leaves->save();
 
         $assignments->assignmentleaves()->save($leaves);
 
         $role = new Role();
-        $setRole = (rand(1, 2) < 2) ? "Ansatt" : "Admin";
+        $setRole = (rand(1, 2) < 2) ? "Qualification" : "Position";
         $role->role_type = $setRole;
-        $role->start_date  = Carbon::today()->subDays(rand(1, 365));
-        $role->end_date  = Carbon::today()->subDays(rand(1, 365));
+        $role->start_date  = fake()->date();
+        $role->end_date  = fake()->date();
         $role->save();
 
         $assignments->assignmentroles()->save($role);
-
 
         return redirect(route('employees.index'));
     }

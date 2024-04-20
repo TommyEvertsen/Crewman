@@ -19,9 +19,9 @@ class PastAndFutureEmployerFactory extends Factory
     {
         return [
             'id' => $this->faker->numberBetween(1, 99999),
-            'name' => fake()->name(),
-            'start_date' => Carbon::today()->subDays(rand(1, 365)),
-            'end_date' => Carbon::today()->subDays(rand(1, 365)),
+            'name' => fake()->company(),
+            'start_date' => fake()->date(),
+            'end_date' => fake()->date(),
         ];
     }
 }

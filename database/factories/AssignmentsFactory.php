@@ -22,9 +22,9 @@ class AssignmentsFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name() . ' ' . 'Assignment',
-            'start_date' => Carbon::today()->subDays(rand(1, 365)),
-            'end_date' => Carbon::today()->subDays(rand(1, 365)),
+            'name' => fake()->bs(),
+            'start_date' => fake()->date(),
+            'end_date' => fake()->date(),
         ];
     }
     /* *

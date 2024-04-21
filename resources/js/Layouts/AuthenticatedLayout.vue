@@ -1,24 +1,45 @@
-<script setup>
-import Employees from "@/Pages/Employees.vue";
-</script>
+<script setup></script>
 
 <template>
-    <v-app-bar>
-        <v-app-bar-title>Crewman</v-app-bar-title>
-    </v-app-bar>
+    <v-app>
+        <v-app-bar>
+            <v-app-bar-title>Crewman</v-app-bar-title>
+            <v-list-item
+                prepend-icon="mdi-home"
+                :href="route('dashboard')"
+                title="Dashboard"
+          
+            ></v-list-item>
+            <v-list-item
+                prepend-icon="mdi-account-group"
+                :href="route('employees.index')"
+                title="View Employees"
+            ></v-list-item>
+            <v-list-item
+                prepend-icon="mdi-account-plus"
+                :href="route('newEmployee')"
+                title="Add employee"
+            ></v-list-item>
+        </v-app-bar>
 
-    <v-navigation-drawer :width="178">
-        <v-list-item
-            :href="route('employees.index')"
-            link
-            title="View Employees"
-        ></v-list-item>
-        <v-list-item
-            :href="route('newEmployee')"
-            link
-            title="Add employee"
-        ></v-list-item>
-    </v-navigation-drawer>
-
-   
+        <main class="my-auto">
+            <slot name="main" />
+        </main>
+    </v-app>
 </template>
+
+<style>
+.v-app-bar {
+    background-color: rgb(54, 162, 235) !important;
+    color: azure !important;
+}
+
+.v-list-item__spacer {
+    width: 5px !important;
+}
+
+.v-icon {
+    color: aliceblue;
+    opacity: 90 !important;
+}
+</style>

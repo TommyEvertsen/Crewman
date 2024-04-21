@@ -33,7 +33,7 @@ class EmployeesFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Employees $employee) {
-            $employee->pastAndFutureEmployer()->save(PastAndFutureEmployer::factory()->make());
+            $employee->pastAndFutureEmployer()->saveMany(PastAndFutureEmployer::factory()->count(2)->make());
         });
     }
 }

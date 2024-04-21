@@ -1,67 +1,64 @@
 <template>
     <v-app>
-        <v-app-bar>
-            <v-app-bar-title>Crewman</v-app-bar-title>
-            <v-list-item
-                :href="route('employees.index')"
-                link
-                title="View Employees"
-            ></v-list-item>
-            <v-list-item
-                :href="route('newEmployee')"
-                link
-                title="Add employee"
-            ></v-list-item>
-        </v-app-bar>
+        <AuthenticatedLayout
+            ><template #main class="my-auto">
+                <v-sheet flat>
+                    <v-card class="text-center mx-10 my-auto">
+                        <h1 class="text-lg bold">Employee information</h1>
+                        <br />
+                        <p>Name:</p>
+                        <p>{{ employee.firstName }} {{ employee.lastName }}</p>
+                        <br />
+                        <h1>Current employer:</h1>
+                        <p>{{ employee.employer.name }}</p>
+                        <br />
+                        <p>Other employements:</p>
+                        <div
+                            v-for="employers in employee.past_and_future_employer"
+                        >
+                            <p>
+                                {{ employers.name }} -
+                                {{ employers.start_date }} -
+                                {{ employers.end_date }}
+                            </p>
+                        </div>
+                        <br />
 
-        <v-card class="text-center mx-10 my-auto">
-            <h1>Name:</h1>
-            <h2>{{ employee.firstName }} {{ employee.lastName }}</h2>
-            <br />
-            <h1>Current employer:</h1>
-            <h2>{{ employee.employer.name }}</h2>
-            <br />
-            <h1>Other employements:</h1>
-            <h2>{{ employee.past_and_future_employer[0].name }}</h2>
-            <h2>
-                {{ employee.past_and_future_employer[0].start_date }} -
-                {{ employee.past_and_future_employer[0].end_date }}
-            </h2>
-
-            <br />
-            <h1>Assignments:</h1>
-            <h2>{{ employee.employer.assignments[0].name }}</h2>
-            <h2>
-                {{ employee.employer.assignments[0].start_date }} -
-                {{ employee.employer.assignments[0].end_date }}
-            </h2>
-
-            <br />
-            <h1>Roles:</h1>
-            <h2>
-                {{
-                    employee.employer.assignments[0].assignmentroles[0]
-                        .role_type
-                }}
-            </h2>
-            <br />
-            <h1>Leaves:</h1>
-            <h2>
-                {{ employee.employer.assignments[0].assignmentleaves[0].name }}
-            </h2>
-
-            <h1>{{ console.log(employee) }}</h1>
-        </v-card>
+                        <p>Assignments:</p>
+                        <div
+                            v-for="assignment in employee.employer.assignments"
+                        >
+                            <p>
+                                {{ assignment.name }} -
+                                {{ assignment.start_date }} -
+                                {{ assignment.end_date }}
+                            </p>
+                            <p v-for="role in assignment.assignmentroles">
+                                Role: {{ role.role_type }}
+                                {{ role.start_date }} -
+                                {{ role.end_date }}
+                            </p>
+                            <p v-for="leave in assignment.assignmentleaves">
+                                Leaves: {{ leave.name }}
+                                {{ leave.start_date }} -
+                                {{ leave.end_date }}
+                            </p>
+                            <br />
+                            <p>{{ console.log(employee) }}</p>
+                        </div>
+                    </v-card>
+                </v-sheet>
+            </template>
+        </AuthenticatedLayout>
     </v-app>
 </template>
 
 <script setup>
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+
 defineProps(["employee"]);
 </script>
 
 <style>
-.v-app-bar {
-    background-color: rgb(54, 162, 235) !important;
-    color: azure !important;
-}
+
 </style>

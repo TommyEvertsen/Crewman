@@ -15,9 +15,9 @@ class EmployerSeeder extends Seeder
      */
     public function run(): void
     {
-        Employers::factory(10)
+        Employers::factory(4)
             ->has(Employees::factory()->count(1), 'employees')
-            ->has(Assignments::factory()->count(1), 'assignments')
+            ->has(Assignments::factory()->count(2), 'assignments')
             ->create();
     }
 }
